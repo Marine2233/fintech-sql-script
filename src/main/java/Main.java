@@ -1,4 +1,4 @@
-package sql;
+import sql.Script;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -40,7 +40,16 @@ public class Main {
                 }
             },service);
 
+            CompletableFuture<Void>makeNewScript = CompletableFuture.runAsync(()->{
+                try {
+                    script.queryForFileSqlBaseScript();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            },service);
+
             CompletableFuture.allOf(createDb,futureAccount,futureClient).join();
+            CompletableFuture.allOf(makeNewScript).join();
         }
     }
 }
