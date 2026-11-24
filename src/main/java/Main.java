@@ -1,4 +1,4 @@
-package sql;
+import sql.Script;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
