@@ -1,7 +1,6 @@
 package sql;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -12,7 +11,6 @@ public final class Script {
     private final Path makeDB = directory.resolve("step1.sql");
     private final Path fileClient = directory.resolve("client.sql");
     private final Path fileAccount = directory.resolve("account.sql");
-
 
 
     public void createDB() throws IOException {
@@ -63,25 +61,54 @@ public final class Script {
     }
 
     public void insertClient() throws IOException {
-        String insert ="insert into client (full_name,email,registered)\n" +
-                "values('client_1','client_1@mail.ru','25-01-10'),\n" +
-                "('client_2','client_2@mail.ru','22-02-20'),\n" +
-                "('client_3','client_3@mail.ru','22-02-15'),\n" +
-                "('client_4','client_4@mail.ru','22-04-01'),\n" +
-                "('client_5','client_5@mail.ru','22-05-05');";
+        String insert ="INSERT INTO client (full_name, email, registered) VALUES\n" +
+                "('Иванов Александр Сергеевич', 'a.ivanov@example.ru', '2025-01-15'),\n" +
+                "('Смирнова Елена Викторовна', 'elena.smirnova@mail.ru', '2025-02-03'),\n" +
+                "('Кузнецов Дмитрий Андреевич', 'd.kuznetsov@yandex.ru', '2025-03-19'),\n" +
+                "('Попова Анна Михайловна', 'anna.popova@gmail.com', '2025-04-10'),\n" +
+                "('Васильев Максим Олегович', 'm.vasiliev@bk.ru', '2025-05-22'),\n" +
+                "('Петрова Ольга Николаевна', 'olga.petrova@inbox.ru', '2025-06-30'),\n" +
+                "('Соколов Артём Владимирович', 'artem.sokolov@list.ru', '2025-08-14'),\n" +
+                "('Михайлова Татьяна Павловна', 't.mikhailova@rambler.ru', '2025-09-05'),\n" +
+                "('Новиков Сергей Игоревич', 's.novikov@example.com', '2025-11-11'),\n" +
+                "('Фёдорова Наталья Алексеевна', 'n.fedorova@yandex.ru', '2026-01-20'),\n" +
+                "('Морозов Алексей Евгеньевич', 'alex.morozov@gmail.com', '2026-03-08'),\n" +
+                "('Волкова Екатерина Дмитриевна', 'e.volkova@mail.ru', '2026-05-17'),\n" +
+                "('Алексеев Андрей Юрьевич', 'andrey.alekseev@example.ru', '2026-07-29'),\n" +
+                "('Лебедева Мария Александровна', 'm.lebedeva@yandex.ru', '2026-10-02'),\n" +
+                "('Семёнов Илья Романович', 'ilya.semenov@gmail.com', DEFAULT);\n";
 
         Files.writeString(fileClient,insert, StandardOpenOption.CREATE,StandardOpenOption.APPEND);
     }
     public void insertAccount() throws IOException {
-        String insert = "insert into account_number (\n" +
-                "client_id, account_number,balance,currency)\n" +
-                "values \n" +
-                "(1,'RU0000000001',15000,'RUB'),\n" +
-                "(1,'RU0000000002',700,'RUB'),\n" +
-                "(2,'RU0000000003',12000,'RUB'),\n" +
-                "(3,'RU0000000004',57000,'RUB'),\n" +
-                "(4,'RU0000000005',18000,'RUB'),\n" +
-                "(5,'RU0000000006',22000,'RUB');\n";
+        String insert = "INSERT INTO account_number (client_id, account_number, balance, currency) VALUES\n" +
+                "(1, '40817810000000000001', 15400.50, 'RUB'),\n" +
+                "(1, '40817810000000000002', 64200.00, 'RUB'),\n" +
+                "(2, '40817810000000000003', 8950.75, 'RUB'),\n" +
+                "(3, '40817810000000000004', 42000.00, 'RUB'),\n" +
+                "(3, '40817810000000000005', 3100.20, 'RUB'),\n" +
+                "(3, '40817810000000000006', 78500.00, 'RUB'),\n" +
+                "(4, '40817810000000000007', 2500.00, 'RUB'),\n" +
+                "(5, '40817810000000000008', 51340.90, 'RUB'),\n" +
+                "(6, '40817810000000000009', 19800.00, 'RUB'),\n" +
+                "(6, '40817810000000000010', 33450.15, 'RUB'),\n" +
+                "(7, '40817810000000000011', 80000.00, 'RUB'),\n" +
+                "(8, '40817810000000000012', 12600.40, 'RUB'),\n" +
+                "(9, '40817810000000000013', 47900.00, 'RUB'),\n" +
+                "(9, '40817810000000000014', 6200.80, 'RUB'),\n" +
+                "(10, '40817810000000000015', 29100.00, 'RUB'),\n" +
+                "(11, '40817810000000000016', 71450.60, 'RUB'),\n" +
+                "(12, '40817810000000000017', 14200.00, 'RUB'),\n" +
+                "(12, '40817810000000000018', 55000.25, 'RUB'),\n" +
+                "(13, '40817810000000000019', 9750.00, 'RUB'),\n" +
+                "(14, '40817810000000000020', 38600.30, 'RUB'),\n" +
+                "(15, '40817810000000000021', 22300.00, 'RUB'),\n" +
+                "(15, '40817810000000000022', 68900.45, DEFAULT),\n" +
+                " (1, 'RU000000000000000001', 15000.00, 'RUB'),\n " +
+                "(2, 'RU000000000000000002', 23500.50, 'RUB'),\n" +
+                "(3, 'RU000000000000000005', 41000.00, 'RUB'),\n" +
+                "(4, 'RU000000000000000009', 9800.75, 'RUB'),\n" +
+                "(5, 'RU000000000000000007', 32000.00, 'RUB');\n";
 
         Files.writeString(fileAccount,insert, StandardOpenOption.CREATE,StandardOpenOption.APPEND);
     }
